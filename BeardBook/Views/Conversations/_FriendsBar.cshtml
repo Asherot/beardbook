@@ -9,7 +9,7 @@
     @foreach (var item in Model)
     {
         var avatarSrc = item.AvatarId == 0
-            ? "../Content/Media/avatar-tiny.jpg"
+            ? "../../Content/Media/avatar-tiny.jpg"
             : Url.Action("Index", "Files", new { id = item.AvatarId });
         var displayName = item.Nickname ?? item.FullName;
         
