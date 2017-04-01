@@ -1,0 +1,50 @@
+﻿@model BeardBook.Models.ProfileViewModels.ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#profile-details" data-toggle="tab">Profile Details</a></li>
+            <li><a href="#photos" data-toggle="tab">Uploaded Photos</a></li>
+            <li><a href="#videos" data-toggle="tab">Uploaded Videos</a></li>
+            <li><a href="#friends" data-toggle="tab">Friends</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="profile-details">
+                @Html.Partial("_DetailsTab", Model)
+            </div>
+            <div class="tab-pane" id="photos">
+                @Html.Action("UploadedPhotosTab")
+            </div>
+            <div class="tab-pane" id="videos">
+                @Html.Action("UploadedVideosTab")
+            </div>
+            <div class="tab-pane" id="friends">
+                <br />
+                @using (Ajax.BeginForm("Index", "Profile", new { },
+                    new AjaxOptions { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "friendsList" }))
+                {
+                    <div class="row">
+                        <div class="checkbox col-md-3">
+                            <label><input type="checkbox" name="onlyFriends" value="true">Only Friends</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="input-group">
+                                <input type="text" name="searchTerm" style="max-width: 100%" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">Go!</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <br />
+                @Html.Partial("_Friends", Model.Users)
+            </div>
+        </div>
+    </div>
+</div>

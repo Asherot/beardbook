@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EBE1F845-BA62-4A85-9CC7-77F655A59C47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BeardBook.DAL</RootNamespace>
+    <AssemblyName>BeardBook.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BeardBookDbContext.cs" />
+    <Compile Include="FlestreamService.cs" />
+    <Compile Include="GetConversationQuery.cs" />
+    <Compile Include="GetConversationQueryHandler.cs" />
+    <Compile Include="GetFileQuery.cs" />
+    <Compile Include="GetFileQueryHandler.cs" />
+    <Compile Include="GetUserFilesQuery.cs" />
+    <Compile Include="GetUserFilesQueryHandler.cs" />
+    <Compile Include="FindUsersQuery.cs" />
+    <Compile Include="FindUsersQueryHandler.cs" />
+    <Compile Include="GetWallPostsQuery.cs" />
+    <Compile Include="IQuery.cs" />
+    <Compile Include="IQueryHandler.cs" />
+    <Compile Include="MigrationsContextFactory.cs" />
+    <Compile Include="GetWallPostsQueryHandler.cs" />
+    <Compile Include="Migrations\201702091408281_Initial.cs" />
+    <Compile Include="Migrations\201702091408281_Initial.Designer.cs">
+      <DependentUpon>201702091408281_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702091411091_Filestream.cs" />
+    <Compile Include="Migrations\201702091411091_Filestream.Designer.cs">
+      <DependentUpon>201702091411091_Filestream.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702231144586_Friends.cs" />
+    <Compile Include="Migrations\201702231144586_Friends.Designer.cs">
+      <DependentUpon>201702231144586_Friends.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702271443275_File-Post_navigation_property.cs" />
+    <Compile Include="Migrations\201702271443275_File-Post_navigation_property.Designer.cs">
+      <DependentUpon>201702271443275_File-Post_navigation_property.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702281021130_Consistent_DateTime_Properties.cs" />
+    <Compile Include="Migrations\201702281021130_Consistent_DateTime_Properties.Designer.cs">
+      <DependentUpon>201702281021130_Consistent_DateTime_Properties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702281127020_Conversations.cs" />
+    <Compile Include="Migrations\201702281127020_Conversations.Designer.cs">
+      <DependentUpon>201702281127020_Conversations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionQueryHandlerDecorator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BeardBook.Entities\BeardBook.Entities.csproj">
+      <Project>{5057b5a9-5711-4bf9-bc9c-5c3c22a2e585}</Project>
+      <Name>BeardBook.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeardBook.Identity\BeardBook.Identity.csproj">
+      <Project>{8207a7ee-965c-4013-8e16-a2581e648629}</Project>
+      <Name>BeardBook.Identity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702091408281_Initial.resx">
+      <DependentUpon>201702091408281_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702091411091_Filestream.resx">
+      <DependentUpon>201702091411091_Filestream.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702231144586_Friends.resx">
+      <DependentUpon>201702231144586_Friends.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702271443275_File-Post_navigation_property.resx">
+      <DependentUpon>201702271443275_File-Post_navigation_property.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702281021130_Consistent_DateTime_Properties.resx">
+      <DependentUpon>201702281021130_Consistent_DateTime_Properties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702281127020_Conversations.resx">
+      <DependentUpon>201702281127020_Conversations.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

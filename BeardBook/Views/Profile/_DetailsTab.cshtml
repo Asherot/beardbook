@@ -1,0 +1,46 @@
+﻿@model BeardBook.Models.ProfileViewModels.ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+    var hasAvatar = Model.AvatarId != 0;
+    var avatarSrc = hasAvatar
+        ? Url.Action("Index", "Files", new { id = Model.AvatarId })
+        : "../Content/Media/avatar-tiny.jpg";
+}
+
+<br />
+<dl class="dl-horizontal">
+    <dt>Avatar:</dt>
+    <dd>
+        <img src="@avatarSrc" class="media-object img-avatar" alt="Avatar">
+    </dd>
+    <dt></dt>
+    <dd><br /></dd>
+    <dt>Email:</dt>
+    <dd>
+        @Model.Email
+    </dd>
+    <dt></dt>
+    <dd><br /></dd>
+    <dt>Full Name:</dt>
+    <dd>
+        @Model.FullName
+    </dd>
+    <dt></dt>
+    <dd><br /></dd>
+    <dt>Nickname:</dt>
+    <dd>
+        @Model.Nickname
+    </dd>
+    <dt></dt>
+    <dd><br /></dd>
+    <dt></dt>
+    <dd>
+        @Html.ActionLink("Edit Profile", "Edit", "Profile", null, new { @class = "btn btn-primary btn-sm" })
+        @if (hasAvatar)
+        {
+            @Html.ActionLink("Remove Avatar", "RemoveAvatar", "Profile", null, new { @class = "btn btn-danger btn-sm" })
+        }
+        @Html.ActionLink("Change Password", "ChangePassword", "Account", null, new { @class = "btn btn-warning btn-sm" })
+    </dd>
+</dl>

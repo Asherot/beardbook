@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BeardBook.Models.PostViewModel>
+
+<div class="list-group scrollable-posts">
+    @foreach (var item in Model)
+    {
+        var avatarSrc = item.AvatarId == 0
+            ? "../Content/Media/avatar-tiny.jpg"
+            : Url.Action("Index", "Files", new {id = item.AvatarId});
+
+        <div class="list-group-item">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img src="@avatarSrc" class="media-object img-avatar" alt="Avatar">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">@item.UserDisplayName<small><i> Posted on @item.Created.ToLocalTime()</i></small></h4>
+                    <p>@item.Text</p>
+                    <p>
+                        @if (item.PhotosIds != null && item.PhotosIds.Count > 0)
+                        {
+                            @:<h4 class="media-bottom"><small><i>Added photos:</i></small></h4>
+                            foreach (var photoId in item.PhotosIds)
+                            {
+                                <a target="_blank" href="@Url.Action("Index", "Files", new {id = photoId})">view photo in new tab</a>
+                                <br />
+                            }
+                        }
+                        @if (item.VideosSrcs != null && item.VideosSrcs.Count > 0)
+                        {
+                            @:<h4 class="media-bottom"><small><i>Added videos:</i></small></h4>
+                            foreach (var videoId in item.VideosSrcs)
+                            {
+                                <a target="_blank" href="@Url.Action("Index", "Files", new {id = videoId})">view video in new tab</a>
+                                <br />
+                            }
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

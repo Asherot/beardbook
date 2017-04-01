@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BeardBook.Models.UserViewModel>
+
+<div id="friendsList">
+    @foreach (var item in Model)
+    {
+        var avatarSrc = item.AvatarId == 0
+            ? "../Content/Media/avatar-tiny.jpg"
+            : Url.Action("Index", "Files", new { id = item.AvatarId });
+
+        <div class="media">
+            <div class="media-left">
+                <img class="img-avatar" src="@avatarSrc" alt="Profile" />
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">@item.FullName</h4>
+                <p>
+                    @item.Email
+                    <br />
+                    @item.Nickname
+                </p>
+            </div>
+            <div class="media-right">
+                @(item.IsFriend
+                    ? Html.ActionLink("Remove Friend", "RemoveFriend", "Friends", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    : Html.ActionLink("Add Friend", "AddFriend", "Friends", new { id = item.Id }, new { @class = "btn btn-primary" })
+                )
+            </div>
+        </div>
+    }
+</div>

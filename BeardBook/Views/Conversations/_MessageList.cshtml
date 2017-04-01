@@ -1,0 +1,32 @@
+﻿@model BeardBook.Models.ConversationsViewModels.ConversationViewModel
+@{
+    var userNames = string.Join(", ", Model.UserNames);
+}
+
+<div id="messageList">
+    <h4>@userNames</h4>
+    <div class="list-group scrollable-posts">
+        @foreach (var item in Model.Messages)
+        {
+            var listGroupColored = Model.UserId == item.UserId
+                ? "list-group-item-info"
+                : "";
+            var avatarSrc = item.UserAvatarId == 0
+                ? "../Content/Media/avatar-tiny.jpg"
+                : Url.Action("Index", "Files", new { id = item.UserAvatarId });
+
+            <div class="list-group-item @listGroupColored">
+                <div class="media">
+                    <div class="media-left">
+                        <img src="@avatarSrc" class="media-object" alt="Avatar" width="32" height="32">
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading"><small><i>Sent @item.Created.ToLocalTime()</i></small></h4>
+                        <p>@item.Text</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

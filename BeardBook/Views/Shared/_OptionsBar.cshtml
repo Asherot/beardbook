@@ -1,0 +1,33 @@
+﻿@model BeardBook.Models.HomeViewModels.OptionsBarViewModel
+
+@{
+    // prevents StackOverflowException from recusrive calling
+    Layout = null;
+    var avatarSrc = Model.AvatarId == 0
+            ? "../Content/Media/avatar-tiny.jpg"
+            : Url.Action("Index", "Files", new { id = Model.AvatarId });
+}
+
+    <div class="media">
+        <div class="media-left">
+            <a href="@Url.Action("Index", "Profile")">
+                <img class="img-avatar" src="@avatarSrc" alt="Profile" />
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">@Model.FullName</h4>
+            <p>
+                @Model.Email
+                <br />
+                @Model.Nickname
+            </p>
+        </div>
+    </div>
+
+<br/>
+<ul class="nav nav-pills nav-stacked">
+    <li id="menu-home"><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li id="menu-profile"><a href="@Url.Action("Index", "Profile")">Profile</a></li>
+    <li id="menu-conversations"><a href="@Url.Action("Index", "Conversations")">Conversations</a></li>
+    <li id="menu-logout"><a href="javascript:UTILS.logout()">Logout</a></li>
+</ul>

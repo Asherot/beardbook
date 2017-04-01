@@ -1,0 +1,16 @@
+﻿@model BeardBook.Models.ConversationsViewModels.ConversationViewModel
+
+@{
+    ViewBag.Title = "Conversations";
+    var link = Url.Action("Index", "Profile") + "#friends";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        You've got no friends to chat with. Add some <a href="@link">here!</a>
+    </div>
+    <div class="col-md-4">
+        @Html.Action("FriendsBar")
+    </div>
+</div>
+

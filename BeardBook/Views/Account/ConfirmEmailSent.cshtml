@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Confirm email";
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <p>
+        Thank you for signing up. The confirmation email has been sent. After clicking the activation link, please
+        @Html.ActionLink("log in here.", "Login", "Account", null, new { id = "loginLink" })
+    </p>
+</div>

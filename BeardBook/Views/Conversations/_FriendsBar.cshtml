@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BeardBook.Models.UserViewModel>
+
+@{
+    // prevents StackOverflowException from recusrive calling
+    Layout = null;
+}
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        var avatarSrc = item.AvatarId == 0
+            ? "../Content/Media/avatar-tiny.jpg"
+            : Url.Action("Index", "Files", new { id = item.AvatarId });
+        var displayName = item.Nickname ?? item.FullName;
+        
+        <a href="@Url.Action("Index", new {id = item.Id})" class="list-group-item">
+            
+            <div class="media">
+                <div class="media-left">
+                    <img src="@avatarSrc" alt="Profile" width="32" height="32"/>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">@displayName</h4>
+                </div>
+            </div>
+        </a>
+    }
+</div>
