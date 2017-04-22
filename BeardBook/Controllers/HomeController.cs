@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity;
 using AutoMapper;
 using BeardBook.Commands;
 using BeardBook.DAL;
-using BeardBook.Entities;
 using BeardBook.Identity;
 using BeardBook.Models;
 using BeardBook.Models.HomeViewModels;
@@ -17,11 +16,11 @@ namespace BeardBook.Controllers
         #region dependencies
 
         private readonly AppUserManager _userManager;
-        private readonly IQueryHandler<GetWallPostsQuery, IEnumerable<Post>> _getUserPostsHandler;
+        private readonly IQueryHandler<GetWallPostsQuery, IEnumerable<PostResult>> _getUserPostsHandler;
         private readonly ICommandHandler<AddPostCommand> _addPostHandler;
 
         public HomeController(AppUserManager userManager,
-            IQueryHandler<GetWallPostsQuery, IEnumerable<Post>> getUserPostsHandler,
+            IQueryHandler<GetWallPostsQuery, IEnumerable<PostResult>> getUserPostsHandler,
             ICommandHandler<AddPostCommand> addPostHandler)
         {
             _userManager = userManager;

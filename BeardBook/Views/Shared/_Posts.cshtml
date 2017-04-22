@@ -21,10 +21,12 @@
                         @if (item.PhotosIds != null && item.PhotosIds.Count > 0)
                         {
                             @:<h4 class="media-bottom"><small><i>Added photos:</i></small></h4>
-                            foreach (var photoId in item.PhotosIds)
+                            foreach (var photo in item.Photos)
                             {
-                                <a target="_blank" href="@Url.Action("Index", "Files", new {id = photoId})">view photo in new tab</a>
-                                <br />
+                                <a target="_blank" href="@Url.Action("Index", "Files", new {id = photo.FileId})">
+                                    <img src="@photo.ThumbnailSrc" alt="photo">
+                                    <b> </b>
+                                </a>
                             }
                         }
                         @if (item.VideosIds != null && item.VideosIds.Count > 0)

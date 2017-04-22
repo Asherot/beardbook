@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BeardBook.Entities;
-using File = BeardBook.Entities.File;
 
 namespace BeardBook.DAL
 {
@@ -27,60 +22,16 @@ namespace BeardBook.DAL
                     .OrderByDescending(f => f.Created)
                 .ToList();
 
-            var filestreamService = new FilestreamService(_context);
-            files.ForEach(f => f.Data = filestreamService.GetFileData(f.Id));
-
             if (query.FileType != FileType.Photo)
-                return files.Select(f => new FileResult(f, new File()));
+                return files.Select(f => new FileResult(f, null));
 
-            var fileResults = new List<FileResult>();
-            foreach (var file in files)
-            {
-                var image = (Bitmap)new ImageConverter().ConvertFrom(file.Data);
-                var size = GetThumbnailSize(image);
-                var thumbnailImage = image?.GetThumbnailImage(
-                    size.Width,
-                    size.Height,
-                    () => false,
-                    IntPtr.Zero);
+            var filestreamService = new FilestreamService(_context);
 
-                var stream = new MemoryStream();
-                thumbnailImage?.Save(stream, ImageFormat.Png);
-                var bytes = stream.ToArray();
-                var thumbnail = new File
-                {
-                    ContentType = "image/png",
-                    Data = bytes
-                };
-                fileResults.Add(new FileResult(file, thumbnail));
-            }
-
-            return fileResults;
+            return files
+                .Select(file => new FileResult(
+                    file,
+                    FileService.CreateThumbnail(filestreamService.GetFileData(file.Id))))
+                .ToList();
         }
-
-        private static Size GetThumbnailSize(Image original)
-        {
-            const int maxPixels = 64;
-
-            var originalWidth = original.Width;
-            var originalHeight = original.Height;
-
-            var factor = originalWidth > originalHeight
-                ? (double) maxPixels / originalWidth
-                : (double) maxPixels / originalHeight;
-
-            return new Size((int)(originalWidth * factor), (int)(originalHeight * factor));
-        }
-    }
-
-    public class FileResult
-    {
-        public FileResult(File file, File thumbnail)
-        {
-            File = file;
-            Thumbnail = thumbnail;
-        }
-        public File File { get; private set; }
-        public File Thumbnail { get; private set; }
     }
 }

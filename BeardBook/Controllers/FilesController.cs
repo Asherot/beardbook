@@ -34,14 +34,5 @@ namespace BeardBook.Controllers
                 return View("Error");
             }
         }
-
-        public static FileType GetFileTypeFrom(string contentType)
-        {
-            return contentType.Contains("image")
-                ? FileType.Photo
-                : (contentType.Contains("video")
-                ? FileType.Video
-                : FileType.Other);
-        }
     }
 }

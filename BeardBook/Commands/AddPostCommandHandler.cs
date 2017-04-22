@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using BeardBook.Controllers;
 using BeardBook.DAL;
 using BeardBook.Entities;
 using File = BeardBook.Entities.File;
@@ -31,7 +30,7 @@ namespace BeardBook.Commands
                 {
                     Name = Path.GetFileName(postedFile.FileName),
                     ContentType = postedFile.ContentType,
-                    FileType = FilesController.GetFileTypeFrom(postedFile.ContentType)
+                    FileType = FileService.GetFileTypeFrom(postedFile.ContentType)
                 };
                 using (var reader = new BinaryReader(postedFile.InputStream))
                 {
