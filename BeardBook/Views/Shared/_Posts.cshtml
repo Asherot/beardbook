@@ -27,10 +27,10 @@
                                 <br />
                             }
                         }
-                        @if (item.VideosSrcs != null && item.VideosSrcs.Count > 0)
+                        @if (item.VideosIds != null && item.VideosIds.Count > 0)
                         {
                             @:<h4 class="media-bottom"><small><i>Added videos:</i></small></h4>
-                            foreach (var videoId in item.VideosSrcs)
+                            foreach (var videoId in item.VideosIds)
                             {
                                 <a target="_blank" href="@Url.Action("Index", "Files", new {id = videoId})">view video in new tab</a>
                                 <br />

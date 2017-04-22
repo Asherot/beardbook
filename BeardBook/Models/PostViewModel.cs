@@ -10,6 +10,6 @@ namespace BeardBook.Models
         public string UserDisplayName { get; set; }
         public int AvatarId { get; set; }
         public ICollection<int> PhotosIds { get; set; }
-        public ICollection<string> VideosSrcs { get; set; }
+        public ICollection<string> VideosIds { get; set; }
     }
 }

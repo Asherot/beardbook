@@ -80,7 +80,7 @@ namespace BeardBook
                             .Select(file => file.Id)
                             .ToList()))
                 .ForMember(
-                    dest => dest.VideosSrcs,
+                    dest => dest.VideosIds,
                     opts => opts.MapFrom(
                         src => src.MediaFiles
                             .Where(file => file.FileType == FileType.Video)
@@ -92,6 +92,20 @@ namespace BeardBook
                     dest => dest.FileId,
                     opts => opts.MapFrom(
                         src => src.Id));
+
+            config.CreateMap<FileResult, UploadedMediaViewModel>()
+                .ForMember(
+                    dest => dest.FileId,
+                    opts => opts.MapFrom(
+                        src => src.File.Id))
+                .ForMember(
+                    dest => dest.Created,
+                    opts => opts.MapFrom(
+                        src => src.File.Created))
+                .ForMember(
+                    dest => dest.ThumbnailSrc,
+                    opts => opts.MapFrom(
+                        src => src.Thumbnail.ToBase64()));
 
             config.CreateMap<UpdateUserInfoCommand, User>();
 

@@ -6,5 +6,6 @@ namespace BeardBook.Models.ProfileViewModels
     {
         public int FileId { get; set; }
         public DateTime Created { get; set; }
+        public string ThumbnailSrc { get; set; }
     }
 }
