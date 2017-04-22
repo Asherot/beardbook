@@ -88,11 +88,11 @@ namespace BeardBook.Controllers
         [ChildActionOnly]
         public ActionResult UploadedPhotosTab()
         {
-            var videos = _userFilesHandler.Handle(new GetUserFilesQuery(
+            var photos = _userFilesHandler.Handle(new GetUserFilesQuery(
                 User.Identity.GetUserId<int>(),
                 FileType.Photo));
 
-            var model = Mapper.Map<List<UploadedMediaViewModel>>(videos);
+            var model = Mapper.Map<List<UploadedMediaViewModel>>(photos);
             return View("_UploadedMediaTab", model);
         }
 
