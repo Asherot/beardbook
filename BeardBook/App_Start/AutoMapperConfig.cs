@@ -63,35 +63,61 @@ namespace BeardBook
 
             config.CreateMap<User, EditViewModel>().ReverseMap();
 
-            config.CreateMap<Post, PostViewModel>()
+            config.CreateMap<PostResult, PostViewModel>()
                 .ForMember(
                     dest => dest.UserDisplayName,
                     opts => opts.MapFrom(
-                        src => src.User.Nickname ?? $"{src.User.FirstName} {src.User.LastName}"))
+                        src => src.Post.User.Nickname ?? $"{src.Post.User.FirstName} {src.Post.User.LastName}"))
                 .ForMember(
                     dest => dest.AvatarId,
                     opts => opts.MapFrom(
-                        src => src.User.Avatar.Id))
+                        src => src.Post.User.Avatar.Id))
+                .ForMember(
+                    dest => dest.Created,
+                    opts => opts.MapFrom(
+                        src => src.Post.Created))
+                .ForMember(
+                    dest => dest.Text,
+                    opts => opts.MapFrom(
+                        src => src.Post.Text))
                 .ForMember(
                     dest => dest.PhotosIds,
                     opts => opts.MapFrom(
-                        src => src.MediaFiles
+                        src => src.Post.MediaFiles
                             .Where(file => file.FileType == FileType.Photo)
                             .Select(file => file.Id)
                             .ToList()))
                 .ForMember(
-                    dest => dest.VideosSrcs,
+                    dest => dest.VideosIds,
                     opts => opts.MapFrom(
-                        src => src.MediaFiles
+                        src => src.Post.MediaFiles
                             .Where(file => file.FileType == FileType.Video)
                             .Select(file => file.Id)
-                            .ToList()));
+                            .ToList()))
+                .ForMember(
+                    dest => dest.Photos,
+                    opts => opts.MapFrom(
+                        src => src.FileResults));
 
             config.CreateMap<File, UploadedMediaViewModel>()
                 .ForMember(
                     dest => dest.FileId,
                     opts => opts.MapFrom(
                         src => src.Id));
+
+            config.CreateMap<FileResult, UploadedMediaViewModel>()
+                .ForMember(
+                    dest => dest.FileId,
+                    opts => opts.MapFrom(
+                        src => src.File.Id))
+                .ForMember(
+                    dest => dest.Created,
+                    opts => opts.MapFrom(
+                        src => src.File.Created))
+                .ForMember(
+                    dest => dest.ThumbnailSrc,
+                    opts => opts.MapFrom(
+                        src => src.Thumbnail.ToBase64()));
 
             config.CreateMap<UpdateUserInfoCommand, User>();
 

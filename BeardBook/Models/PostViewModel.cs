@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BeardBook.Models.ProfileViewModels;
 
 namespace BeardBook.Models
 {
@@ -10,6 +11,7 @@ namespace BeardBook.Models
         public string UserDisplayName { get; set; }
         public int AvatarId { get; set; }
         public ICollection<int> PhotosIds { get; set; }
-        public ICollection<string> VideosSrcs { get; set; }
+        public ICollection<UploadedMediaViewModel> Photos { get; set; }
+        public ICollection<string> VideosIds { get; set; }
     }
 }

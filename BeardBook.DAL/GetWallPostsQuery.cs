@@ -3,7 +3,7 @@ using BeardBook.Entities;
 
 namespace BeardBook.DAL
 {
-    public class GetWallPostsQuery : IQuery<IEnumerable<Post>>
+    public class GetWallPostsQuery : IQuery<IEnumerable<PostResult>>
     {
         public GetWallPostsQuery(int userId)
         {

@@ -4,7 +4,7 @@ using BeardBook.Entities;
 
 namespace BeardBook.DAL
 {
-    public class GetWallPostsQueryHandler : IQueryHandler<GetWallPostsQuery, IEnumerable<Post>>
+    public class GetWallPostsQueryHandler : IQueryHandler<GetWallPostsQuery, IEnumerable<PostResult>>
     {
         private readonly BeardBookDbContext _context;
 
@@ -13,7 +13,7 @@ namespace BeardBook.DAL
             _context = context;
         }
 
-        public IEnumerable<Post> Handle(GetWallPostsQuery query)
+        public IEnumerable<PostResult> Handle(GetWallPostsQuery query)
         {
             var friendsIds = _context.Users
                 .First(u => u.Id == query.UserId)
@@ -26,11 +26,18 @@ namespace BeardBook.DAL
                 .ToList();
 
             var filestreamService = new FilestreamService(_context);
-            foreach (var post in posts)
-                foreach (var file in post.MediaFiles)
-                    file.Data = filestreamService.GetFileData(file.Id);
 
-            return posts;
+            return posts
+                .Select(post => new
+                    {
+                        post,
+                        fileResults = post.MediaFiles
+                        .Where(f => f.FileType == FileType.Photo)
+                            .Select(file => new FileResult(file, FileService.CreateThumbnail(filestreamService.GetFileData(file.Id))))
+                            .ToList()
+                    })
+                    .Select(t => new PostResult(t.post, t.fileResults))
+                    .ToList();
         }
     }
 }

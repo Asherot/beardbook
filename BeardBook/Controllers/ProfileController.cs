@@ -8,6 +8,7 @@ using BeardBook.Models.ProfileViewModels;
 using BeardBook.Commands;
 using BeardBook.Models;
 using AutoMapper;
+using FileResult = BeardBook.DAL.FileResult;
 
 namespace BeardBook.Controllers
 {
@@ -19,13 +20,13 @@ namespace BeardBook.Controllers
         private readonly AppUserManager _userManager;
         private readonly ICommandHandler<UpdateUserInfoCommand> _updateUserHandler;
         private readonly ICommandHandler<RemoveAvatarCommand> _avatarHandler;
-        private readonly IQueryHandler<GetUserFilesQuery, IEnumerable<File>> _userFilesHandler;
+        private readonly IQueryHandler<GetUserFilesQuery, IEnumerable<FileResult>> _userFilesHandler;
         private readonly IQueryHandler<FindUsersQuery, IEnumerable<UserResult>> _usersHandler;
 
         public ProfileController(AppUserManager userManager,
             ICommandHandler<UpdateUserInfoCommand> updateUserHandler,
             ICommandHandler<RemoveAvatarCommand> avatarHandler,
-            IQueryHandler<GetUserFilesQuery, IEnumerable<File>> userFilesHandler,
+            IQueryHandler<GetUserFilesQuery, IEnumerable<FileResult>> userFilesHandler,
             IQueryHandler<FindUsersQuery, IEnumerable<UserResult>> usersHandler)
         {
             _userManager = userManager;

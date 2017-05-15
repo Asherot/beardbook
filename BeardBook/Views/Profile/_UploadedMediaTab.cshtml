@@ -9,10 +9,13 @@
 <div>
     @foreach (var item in Model)
     {
+        var thumbnailSrc = item.ThumbnailSrc
+            ?? "../Content/Media/placeholder.png";
+
         <div class="media">
             <div class="media-left">
                 <a target="_blank" href="@Url.Action("Index", "Files", new {id = item.FileId})">
-                    <img src="~/Content/Media/placeholder.png" class="media-object" alt="Sample Image">
+                    <img src=@thumbnailSrc class="media-object" alt="Sample Image">
                 </a>
             </div>
             <div class="media-body">

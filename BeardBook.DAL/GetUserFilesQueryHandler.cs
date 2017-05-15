@@ -4,7 +4,7 @@ using BeardBook.Entities;
 
 namespace BeardBook.DAL
 {
-    public class GetUserFilesQueryHandler : IQueryHandler<GetUserFilesQuery, IEnumerable<File>>
+    public class GetUserFilesQueryHandler : IQueryHandler<GetUserFilesQuery, IEnumerable<FileResult>>
     {
         private readonly BeardBookDbContext _context;
 
@@ -13,7 +13,7 @@ namespace BeardBook.DAL
             _context = context;
         }
 
-        public IEnumerable<File> Handle(GetUserFilesQuery query)
+        public IEnumerable<FileResult> Handle(GetUserFilesQuery query)
         {
             var files = _context.Posts
                 .Where(p => p.User.Id == query.UserId && p.MediaFiles.Count > 0)
@@ -22,10 +22,16 @@ namespace BeardBook.DAL
                     .OrderByDescending(f => f.Created)
                 .ToList();
 
-            var filestreamService = new FilestreamService(_context);
-            files.ForEach(f => f.Data = filestreamService.GetFileData(f.Id));
+            if (query.FileType != FileType.Photo)
+                return files.Select(f => new FileResult(f, null));
 
-            return files;
+            var filestreamService = new FilestreamService(_context);
+
+            return files
+                .Select(file => new FileResult(
+                    file,
+                    FileService.CreateThumbnail(filestreamService.GetFileData(file.Id))))
+                .ToList();
         }
     }
 }

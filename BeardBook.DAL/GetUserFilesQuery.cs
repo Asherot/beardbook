@@ -3,7 +3,7 @@ using BeardBook.Entities;
 
 namespace BeardBook.DAL
 {
-    public class GetUserFilesQuery : IQuery<IEnumerable<File>>
+    public class GetUserFilesQuery : IQuery<IEnumerable<FileResult>>
     {
         public GetUserFilesQuery(int userId, FileType fileType)
         {
