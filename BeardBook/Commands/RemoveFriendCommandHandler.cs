@@ -21,12 +21,10 @@ namespace BeardBook.Commands
 
             var conversation = _context.Conversations
                 .FirstOrDefault(c => c.Users.Count == 2
-                && c.Users.Any(u => u.Id == command.UserId)
-                && c.Users.Any(u => u.Id == command.FriendId));
-            if (conversation != null)
-            {
-                _context.Conversations.Remove(conversation);
-            }
+                                    && c.Users.Any(u => u.Id == command.UserId)
+                                    && c.Users.Any(u => u.Id == command.FriendId));
+            
+            if (conversation != null) conversation.Active = false;
 
             _context.SaveChanges();
         }
