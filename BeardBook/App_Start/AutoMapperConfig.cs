@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
 using AutoMapper.Configuration;
-using BeardBook.Commands;
 using BeardBook.DAL;
 using BeardBook.Entities;
 using BeardBook.Models;
@@ -118,8 +117,6 @@ namespace BeardBook
                     dest => dest.ThumbnailSrc,
                     opts => opts.MapFrom(
                         src => src.Thumbnail.ToBase64()));
-
-            config.CreateMap<UpdateUserInfoCommand, User>();
 
             config.CreateMap<Conversation, ConversationViewModel>()
                 .ForMember(

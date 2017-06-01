@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BeardBook.DAL;
+﻿using BeardBook.DAL;
 using BeardBook.Entities;
 using BeardBook.Identity;
 using Microsoft.AspNet.Identity;
@@ -20,7 +19,9 @@ namespace BeardBook.Commands
         public void Handle(UpdateUserInfoCommand command)
         {
             var user = _userManager.FindById(command.UserId);
-            Mapper.Map(command, user);
+            user.FirstName = command.FirstName;
+            user.LastName = command.LastName;
+            user.Nickname = command.Nickname;
             _userManager.Update(user);
 
             if (command.UploadedAvatar == null || command.UploadedAvatar.ContentLength <= 0)
@@ -39,6 +40,7 @@ namespace BeardBook.Commands
 
             user.Avatar = avatar;
             _userManager.Update(user);
+
             var filestreamService = new FilestreamService(_context);
             filestreamService.SaveFileData(avatar);
         }
