@@ -17,19 +17,21 @@ namespace BeardBook.Commands
         {
             var user = _context.Users.First(u => u.Id == command.UserId);
             var friend = _context.Users.First(u => u.Id == command.FriendId);
+
             user.Friends.Add(friend);
             friend.Friends.Add(user);
 
             var conversation = _context.Conversations
-                .FirstOrDefault(c => c.Users.Count == 2
-                                && c.Users.Any(u => u.Id == command.UserId)
-                                && c.Users.Any(u => u.Id == command.FriendId));
+                .FirstOrDefault(c => c.Users.Any(u => u.Id == command.UserId)
+                                  && c.Users.Any(u => u.Id == command.FriendId)
+                                  && c.Users.Count == 2);
 
             if (conversation == null)
             {
                 _context.Conversations.Add(new Conversation
                 {
-                    Users = new[] { user, friend }
+                    Users = new[] { user, friend },
+                    Active = true
                 }); 
             }
             else

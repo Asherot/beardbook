@@ -16,15 +16,15 @@ namespace BeardBook.DAL
         {
             var conversation = query.FriendId != 0
                             ? _context.Conversations
-                                    .FirstOrDefault(c => c.Users.Count == 2
+                                      .FirstOrDefault(c => c.Active
                                                         && c.Users.Any(u => u.Id == query.UserId)
                                                         && c.Users.Any(u => u.Id == query.FriendId)
-                                                        && c.Active) 
+                                                        && c.Users.Count == 2)
                             : _context.Conversations
-                                   .Where(c => c.Active
-                                            && c.Users.Any(u => u.Id == query.UserId))
-                                   .OrderByDescending(c => c.LastUpdate)
-                                   .FirstOrDefault();
+                                      .Where(c => c.Active
+                                               && c.Users.Any(u => u.Id == query.UserId))
+                                      .OrderByDescending(c => c.LastUpdate)
+                                      .FirstOrDefault();
 
             if (conversation == null) return null;
 
