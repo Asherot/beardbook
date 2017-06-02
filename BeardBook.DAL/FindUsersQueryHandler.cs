@@ -16,22 +16,25 @@ namespace BeardBook.DAL
         public IEnumerable<UserResult> Handle(FindUsersQuery query)
         {
             var user = _context.Users.First(u => u.Id == query.UserId);
+
             var users = _context.Users
                 .Where(u =>
                     u.Id != query.UserId
                     && (query.SearchTerm == null
-                    || u.FirstName.StartsWith(query.SearchTerm)
-                    || u.LastName.StartsWith(query.SearchTerm))).ToList();
+                        || u.FirstName.StartsWith(query.SearchTerm)
+                        || u.LastName.StartsWith(query.SearchTerm)))
+                .ToList();
+
             var userResults = users
                 .Select(u => new UserResult
                 {
                     User = u,
                     IsFriend = user.Friends.Any(f => f.Id == u.Id)
-
                 });
+
             return query.OnlyFriends 
-                ? userResults.Where(u => u.IsFriend).ToList() 
-                : userResults.ToList();
+                ? userResults.Where(u => u.IsFriend) 
+                : userResults;
         }
     }
 
