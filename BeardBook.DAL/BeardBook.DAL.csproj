@@ -64,6 +64,8 @@
     <Compile Include="FlestreamService.cs" />
     <Compile Include="GetConversationQuery.cs" />
     <Compile Include="GetConversationQueryHandler.cs" />
+    <Compile Include="GetConversationsUsersQuery.cs" />
+    <Compile Include="GetConversationsUsersQueryHandler.cs" />
     <Compile Include="GetFileQuery.cs" />
     <Compile Include="GetFileQueryHandler.cs" />
     <Compile Include="GetUserFilesQuery.cs" />
@@ -98,6 +100,10 @@
     <Compile Include="Migrations\201702281127020_Conversations.cs" />
     <Compile Include="Migrations\201702281127020_Conversations.Designer.cs">
       <DependentUpon>201702281127020_Conversations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706011348584_Conversation_Active_Field.cs" />
+    <Compile Include="Migrations\201706011348584_Conversation_Active_Field.Designer.cs">
+      <DependentUpon>201706011348584_Conversation_Active_Field.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PostResult.cs" />
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702281127020_Conversations.resx">
       <DependentUpon>201702281127020_Conversations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706011348584_Conversation_Active_Field.resx">
+      <DependentUpon>201706011348584_Conversation_Active_Field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

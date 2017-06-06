@@ -16,17 +16,16 @@ namespace BeardBook.Commands
         {
             var user = _context.Users.First(u => u.Id == command.UserId);
             var friend = _context.Users.First(u => u.Id == command.FriendId);
+
             user.Friends.Remove(friend);
             friend.Friends.Remove(user);
 
             var conversation = _context.Conversations
-                .FirstOrDefault(c => c.Users.Count == 2
-                && c.Users.Any(u => u.Id == command.UserId)
-                && c.Users.Any(u => u.Id == command.FriendId));
-            if (conversation != null)
-            {
-                _context.Conversations.Remove(conversation);
-            }
+                .FirstOrDefault(c => c.Users.Any(u => u.Id == command.UserId)
+                                  && c.Users.Any(u => u.Id == command.FriendId)
+                                  && c.Users.Count == 2);
+            
+            if (conversation != null) conversation.Active = false;
 
             _context.SaveChanges();
         }

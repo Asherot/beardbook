@@ -4,7 +4,6 @@ using AutoMapper;
 using BeardBook.Commands;
 using BeardBook.DAL;
 using BeardBook.Entities;
-using BeardBook.Models;
 using BeardBook.Models.ConversationsViewModels;
 using Microsoft.AspNet.Identity;
 
@@ -15,12 +14,12 @@ namespace BeardBook.Controllers
     {
         #region dependencies
 
-        private readonly IQueryHandler<FindUsersQuery, IEnumerable<UserResult>> _usersHandler;
+        private readonly IQueryHandler<GetConversationsUsersQuery, IEnumerable<User>> _usersHandler;
         private readonly IQueryHandler<GetConversationQuery, Conversation> _conversationHandler;
         private readonly ICommandHandler<SendMessageCommand> _messageHandler;
 
         public ConversationsController(
-            IQueryHandler<FindUsersQuery, IEnumerable<UserResult>> usersHandler,
+            IQueryHandler<GetConversationsUsersQuery, IEnumerable<User>> usersHandler,
             IQueryHandler<GetConversationQuery, Conversation> conversationHandler,
             ICommandHandler<SendMessageCommand> messageHandler)
         {
@@ -54,9 +53,8 @@ namespace BeardBook.Controllers
             if (!ModelState.IsValid) return View("Index", model);
             if (string.IsNullOrWhiteSpace(model.MessageText)) return RedirectToAction("Index");
 
-            var userId = User.Identity.GetUserId<int>();
             _messageHandler.Handle(new SendMessageCommand(
-                userId,
+                User.Identity.GetUserId<int>(),
                 model.ConversationId,
                 model.MessageText,
                 Url.Action("Index", "Conversations", new {}, Request.Url?.Scheme) + "/Index"));
@@ -67,12 +65,10 @@ namespace BeardBook.Controllers
         [ChildActionOnly]
         public ActionResult FriendsBar()
         {
-            var userId = User.Identity.GetUserId<int>();
+            var users = _usersHandler.Handle(
+                new GetConversationsUsersQuery(User.Identity.GetUserId<int>()));
 
-            var userResults = _usersHandler.Handle(
-                new FindUsersQuery(userId, null, true));
-
-            var model = Mapper.Map<List<UserViewModel>>(userResults);
+            var model = Mapper.Map<List<ConversationUserViewModel>>(users);
             return View("_FriendsBar", model);
         }
     }

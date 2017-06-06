@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using BeardBook.DAL;
 using BeardBook.Entities;
 
@@ -18,13 +17,27 @@ namespace BeardBook.Commands
         {
             var user = _context.Users.First(u => u.Id == command.UserId);
             var friend = _context.Users.First(u => u.Id == command.FriendId);
+
             user.Friends.Add(friend);
             friend.Friends.Add(user);
 
-            _context.Conversations.Add(new Conversation
+            var conversation = _context.Conversations
+                .FirstOrDefault(c => c.Users.Any(u => u.Id == command.UserId)
+                                  && c.Users.Any(u => u.Id == command.FriendId)
+                                  && c.Users.Count == 2);
+
+            if (conversation == null)
             {
-                Users = new List<User>(new []{user, friend})
-            });
+                _context.Conversations.Add(new Conversation
+                {
+                    Users = new[] { user, friend },
+                    Active = true
+                }); 
+            }
+            else
+            {
+                conversation.Active = true;
+            }
 
             _context.SaveChanges();
         }
