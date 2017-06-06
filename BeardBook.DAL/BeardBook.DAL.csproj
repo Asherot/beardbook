@@ -64,6 +64,8 @@
     <Compile Include="FlestreamService.cs" />
     <Compile Include="GetConversationQuery.cs" />
     <Compile Include="GetConversationQueryHandler.cs" />
+    <Compile Include="GetConversationsUsersQuery.cs" />
+    <Compile Include="GetConversationsUsersQueryHandler.cs" />
     <Compile Include="GetFileQuery.cs" />
     <Compile Include="GetFileQueryHandler.cs" />
     <Compile Include="GetUserFilesQuery.cs" />

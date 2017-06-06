@@ -16,15 +16,27 @@ namespace BeardBook
         {
             var config = new MapperConfigurationExpression();
 
+            config.CreateMap<User, HomeViewModel>();
+
+            config.CreateMap<User, EditViewModel>().ReverseMap();
+
             config.CreateMap<User, OptionsBarViewModel>()
                 .ForMember(
                     dest => dest.FullName,
                     opts => opts.MapFrom(
-                        src => $"{src.FirstName} {src.LastName}"))
+                        src => $"{src.FirstName} {src.LastName}"));
+
+            config.CreateMap<User, ConversationUserViewModel>()
                 .ForMember(
-                    dest => dest.AvatarId,
+                    dest => dest.FullName,
                     opts => opts.MapFrom(
-                        src => src.Avatar.Id));
+                        src => $"{src.FirstName} {src.LastName}"));
+
+            config.CreateMap<User, ProfileViewModel>()
+                .ForMember(
+                    dest => dest.FullName,
+                    opts => opts.MapFrom(
+                        src => $"{src.FirstName} {src.LastName}"));
 
             config.CreateMap<UserResult, UserViewModel>()
                 .ForMember(
@@ -46,21 +58,7 @@ namespace BeardBook
                 .ForMember(
                     dest => dest.AvatarId,
                     opts => opts.MapFrom(
-                        src => src.User.Avatar.Id));
-
-            config.CreateMap<User, ProfileViewModel>()
-                .ForMember(
-                    dest => dest.FullName,
-                    opts => opts.MapFrom(
-                        src => $"{src.FirstName} {src.LastName}"))
-                .ForMember(
-                    dest => dest.AvatarId,
-                    opts => opts.MapFrom(
-                        src => src.Avatar.Id));
-            
-            config.CreateMap<User, HomeViewModel>();
-
-            config.CreateMap<User, EditViewModel>().ReverseMap();
+                        src => src.User.AvatarId));
 
             config.CreateMap<PostResult, PostViewModel>()
                 .ForMember(
