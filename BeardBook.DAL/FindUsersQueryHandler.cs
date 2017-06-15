@@ -17,15 +17,11 @@ namespace BeardBook.DAL
         {
             var user = _context.Users.First(u => u.Id == query.UserId);
 
-            var users = _context.Users
-                .Where(u =>
-                    u.Id != query.UserId
-                    && (query.SearchTerm == null
-                        || u.FirstName.StartsWith(query.SearchTerm)
-                        || u.LastName.StartsWith(query.SearchTerm)))
-                .ToList();
-
-            var userResults = users
+            var userResults = _context.Users
+                .Where(u => u.Id != query.UserId)
+                .Where(u => u.FirstName.StartsWith(query.SearchTerm)
+                         || u.LastName.StartsWith(query.SearchTerm))
+                .ToList()
                 .Select(u => new UserResult
                 {
                     User = u,
