@@ -324,6 +324,7 @@
     <Content Include="Views\Conversations\_MessageList.cshtml" />
     <Content Include="Views\Profile\_DetailsTab.cshtml" />
     <Content Include="Views\Conversations\NoConversations.cshtml" />
+    <Content Include="Views\Shared\PermissionDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

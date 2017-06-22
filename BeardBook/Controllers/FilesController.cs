@@ -31,7 +31,7 @@ namespace BeardBook.Controllers
             }
             catch (InvalidOperationException)
             {
-                return View("Error");
+                return View("PermissionDenied");
             }
         }
     }
