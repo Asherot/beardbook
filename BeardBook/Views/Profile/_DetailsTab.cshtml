@@ -4,7 +4,7 @@
     ViewBag.Title = "Profile";
     var hasAvatar = Model.AvatarId != 0;
     var avatarSrc = hasAvatar
-        ? Url.Action("Index", "Files", new { id = Model.AvatarId })
+        ? Url.Action("GetFile", "Files", new { id = Model.AvatarId })
         : "../Content/Media/avatar-tiny.jpg";
 }
 

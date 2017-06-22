@@ -10,9 +10,9 @@ namespace BeardBook
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Files",
-                "Files/{id}",
-                new {controller = "Files", action = "Index", id = 0 }
+                "File",
+                "File/{id}",
+                new {controller = "Files", action = "GetFile", id = 0 }
             );
 
             routes.MapRoute(

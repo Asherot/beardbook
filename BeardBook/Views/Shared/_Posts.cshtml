@@ -5,7 +5,7 @@
     {
         var avatarSrc = item.AvatarId == 0
             ? "../Content/Media/avatar-tiny.jpg"
-            : Url.Action("Index", "Files", new {id = item.AvatarId});
+            : Url.Action("GetFile", "Files", new {id = item.AvatarId});
 
         <div class="list-group-item">
             <div class="media">
@@ -23,7 +23,7 @@
                             @:<h4 class="media-bottom"><small><i>Added photos:</i></small></h4>
                             foreach (var photo in item.Photos)
                             {
-                                <a target="_blank" href="@Url.Action("Index", "Files", new {id = photo.FileId})">
+                                <a target="_blank" href="@Url.Action("GetFile", "Files", new {id = photo.FileId})">
                                     <img src="@photo.ThumbnailSrc" alt="photo">
                                     <b> </b>
                                 </a>
@@ -34,7 +34,7 @@
                             @:<h4 class="media-bottom"><small><i>Added videos:</i></small></h4>
                             foreach (var videoId in item.VideosIds)
                             {
-                                <a target="_blank" href="@Url.Action("Index", "Files", new {id = videoId})">view video in new tab</a>
+                                <a target="_blank" href="@Url.Action("GetFile", "Files", new {id = videoId})">view video in new tab</a>
                                 <br />
                             }
                         }

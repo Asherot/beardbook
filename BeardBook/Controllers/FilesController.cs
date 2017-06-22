@@ -20,7 +20,7 @@ namespace BeardBook.Controllers
 
         #endregion
 
-        public ActionResult Index(int id)
+        public ActionResult GetFile(int id)
         {
             try
             {

@@ -14,14 +14,14 @@
 
         <div class="media">
             <div class="media-left">
-                <a target="_blank" href="@Url.Action("Index", "Files", new {id = item.FileId})">
+                <a target="_blank" href="@Url.Action("GetFile", "Files", new {id = item.FileId})">
                     <img src=@thumbnailSrc class="media-object" alt="Sample Image">
                 </a>
             </div>
             <div class="media-body">
                 <h4 class="media-heading"><small><i> Uploaded on @item.Created</i></small></h4>
                 <p>
-                    <a target="_blank" href="@Url.Action("Index", "Files", new {id = item.FileId})">view in new tab</a>
+                    <a target="_blank" href="@Url.Action("GetFile", "Files", new {id = item.FileId})">view in new tab</a>
                 </p>
             </div>
         </div>

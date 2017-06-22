@@ -5,7 +5,7 @@
     Layout = null;
     var avatarSrc = Model.AvatarId == 0
             ? "../Content/Media/avatar-tiny.jpg"
-            : Url.Action("Index", "Files", new { id = Model.AvatarId });
+            : Url.Action("GetFile", "Files", new { id = Model.AvatarId });
 }
 
     <div class="media">

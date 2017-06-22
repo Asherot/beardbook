@@ -10,7 +10,7 @@
     {
         var avatarSrc = item.AvatarId == 0
             ? "../../Content/Media/avatar-tiny.jpg"
-            : Url.Action("Index", "Files", new { id = item.AvatarId });
+            : Url.Action("GetFile", "Files", new { id = item.AvatarId });
         var displayName = item.Nickname ?? item.FullName;
         
         <a href="@Url.Action("Index", new {id = item.Id})" class="list-group-item">

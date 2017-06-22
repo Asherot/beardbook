@@ -13,7 +13,7 @@
                 : "";
             var avatarSrc = item.UserAvatarId == 0
                 ? "../Content/Media/avatar-tiny.jpg"
-                : Url.Action("Index", "Files", new { id = item.UserAvatarId });
+                : Url.Action("GetFile", "Files", new { id = item.UserAvatarId });
 
             <div class="list-group-item @listGroupColored">
                 <div class="media">

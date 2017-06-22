@@ -5,7 +5,7 @@
     {
         var avatarSrc = item.AvatarId == 0
             ? "../Content/Media/avatar-tiny.jpg"
-            : Url.Action("Index", "Files", new { id = item.AvatarId });
+            : Url.Action("GetFile", "Files", new { id = item.AvatarId });
 
         <div class="media">
             <div class="media-left">
