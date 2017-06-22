@@ -19,7 +19,8 @@ namespace BeardBook.DAL
 
             var userResults = _context.Users
                 .Where(u => u.Id != query.UserId)
-                .Where(u => u.FirstName.StartsWith(query.SearchTerm)
+                .Where(u => query.SearchTerm == null
+                         || u.FirstName.StartsWith(query.SearchTerm)
                          || u.LastName.StartsWith(query.SearchTerm))
                 .ToList()
                 .Select(u => new UserResult
