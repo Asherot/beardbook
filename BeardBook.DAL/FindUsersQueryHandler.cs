@@ -15,8 +15,6 @@ namespace BeardBook.DAL
 
         public IEnumerable<UserResult> Handle(FindUsersQuery query)
         {
-            var user = _context.Users.First(u => u.Id == query.UserId);
-
             var userResults = _context.Users
                 .Where(u => u.Id != query.UserId)
                 .Where(u => query.SearchTerm == null
@@ -26,7 +24,7 @@ namespace BeardBook.DAL
                 .Select(u => new UserResult
                 {
                     User = u,
-                    IsFriend = user.Friends.Any(f => f.Id == u.Id)
+                    IsFriend = u.Friends.Any(f => f.Id == query.UserId)
                 });
 
             return query.OnlyFriends 
