@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BeardBook.Entities;
 
 namespace BeardBook.DAL
 {
@@ -22,20 +21,11 @@ namespace BeardBook.DAL
                          || u.LastName.StartsWith(query.SearchTerm))
                 .ToList()
                 .Select(u => new UserResult
-                {
-                    User = u,
-                    IsFriend = u.Friends.Any(f => f.Id == query.UserId)
-                });
+                    (u, u.Friends.Any(f => f.Id == query.UserId)));
 
             return query.OnlyFriends 
                 ? userResults.Where(u => u.IsFriend) 
                 : userResults;
         }
-    }
-
-    public class UserResult
-    {
-        public User User { get; set; }
-        public bool IsFriend { get; set; }
     }
 }
