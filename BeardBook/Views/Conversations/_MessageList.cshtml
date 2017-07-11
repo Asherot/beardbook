@@ -1,4 +1,5 @@
-﻿@model BeardBook.Models.ConversationsViewModels.ConversationViewModel
+﻿@using System.Configuration
+@model BeardBook.Models.ConversationsViewModels.ConversationViewModel
 @{
     var userNames = string.Join(", ", Model.UserNames);
 }
@@ -12,7 +13,7 @@
                 ? "list-group-item-info"
                 : "";
             var avatarSrc = item.UserAvatarId == 0
-                ? "../Content/Media/avatar-tiny.jpg"
+                ? ConfigurationManager.AppSettings["DefaultAvatarSrc"]
                 : Url.Action("GetFile", "Files", new { id = item.UserAvatarId });
 
             <div class="list-group-item @listGroupColored">
