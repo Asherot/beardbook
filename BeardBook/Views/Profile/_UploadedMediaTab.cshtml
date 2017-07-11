@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BeardBook.Models.ProfileViewModels.UploadedMediaViewModel>
+﻿@using System.Configuration
+@model IEnumerable<BeardBook.Models.ProfileViewModels.UploadedMediaViewModel>
 
 @{
     // prevents StackOverflowException from recusrive calling
@@ -10,7 +11,7 @@
     @foreach (var item in Model)
     {
         var thumbnailSrc = item.ThumbnailSrc
-            ?? "../Content/Media/placeholder.png";
+            ?? ConfigurationManager.AppSettings["DefaultPlaceholderSrc"];
 
         <div class="media">
             <div class="media-left">
