@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using BeardBook.DAL;
 using BeardBook.Entities;
 using BeardBook.Identity;
@@ -37,11 +38,18 @@ namespace BeardBook.Commands
                 .First(u => u.Id != command.UserId)
                 .Id;
 
-            _userManager.SendEmail(friendId, "New Message!",
-                "You\'ve just received a new message! To see it please click the following link:" +
-                $"\n{command.Url}/{command.UserId}");
-
             _context.SaveChanges();
+
+            try
+            {
+                _userManager.SendEmail(friendId, "New Message!",
+                        "You\'ve just received a new message! To see it please click the following link:" +
+                        $"\n{command.Url}/{command.UserId}");
+            }
+            catch (Exception)
+            {
+                // swallow error on IIS
+            }
         }
     }
 }
