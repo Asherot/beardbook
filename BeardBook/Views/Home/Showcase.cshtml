@@ -1,6 +1,7 @@
-﻿<div class="jumbotron">
+﻿@using System.Configuration
+<div class="jumbotron">
     <h1>
-        <img src="~/Content/Media/logo.png" width="100" height="100" alt="logo"/>
+        <img src="@ConfigurationManager.AppSettings["LogoSrc"]" width="100" height="100" alt="logo"/>
         BeardBook
     </h1>
     <p class="lead">The ultimate social network for hipsters.</p>
