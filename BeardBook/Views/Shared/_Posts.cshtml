@@ -1,10 +1,11 @@
-﻿@model IEnumerable<BeardBook.Models.PostViewModel>
+﻿@using System.Configuration
+@model IEnumerable<BeardBook.Models.PostViewModel>
 
 <div class="list-group scrollable-posts">
     @foreach (var item in Model)
     {
         var avatarSrc = item.AvatarId == 0
-            ? "../Content/Media/avatar-tiny.jpg"
+            ? ConfigurationManager.AppSettings["DefaultAvatarSrc"]
             : Url.Action("GetFile", "Files", new {id = item.AvatarId});
 
         <div class="list-group-item">
