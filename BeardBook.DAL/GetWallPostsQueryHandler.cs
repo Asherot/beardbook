@@ -32,12 +32,13 @@ namespace BeardBook.DAL
                     {
                         post,
                         fileResults = post.MediaFiles
-                        .Where(f => f.FileType == FileType.Photo)
-                            .Select(file => new FileResult(file, FileService.CreateThumbnail(filestreamService.GetFileData(file.Id))))
-                            .ToList()
+                                          .Where(f => f.FileType == FileType.Photo)
+                                          .Select(file => new FileResult(
+                                              file, FileService.CreateThumbnail(filestreamService.GetFileData(file.Id))))
+                                          .ToList()
                     })
-                    .Select(t => new PostResult(t.post, t.fileResults))
-                    .ToList();
+                .Select(t => new PostResult(t.post, t.fileResults))
+                .ToList();
         }
     }
 }
