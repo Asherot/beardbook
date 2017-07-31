@@ -1,6 +1,6 @@
 ﻿namespace BeardBook.Commands
 {
-    public class RemoveFriendCommand
+    public class RemoveFriendCommand : ICommand
     {
         public RemoveFriendCommand(int userId, int friendId)
         {

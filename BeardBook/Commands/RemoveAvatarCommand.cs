@@ -1,6 +1,6 @@
 ﻿namespace BeardBook.Commands
 {
-    public class RemoveAvatarCommand
+    public class RemoveAvatarCommand : ICommand
     {
         public RemoveAvatarCommand(int userId)
         {

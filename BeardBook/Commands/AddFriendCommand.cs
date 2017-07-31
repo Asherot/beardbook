@@ -1,6 +1,6 @@
 ﻿namespace BeardBook.Commands
 {
-    public class AddFriendCommand
+    public class AddFriendCommand : ICommand
     {
         public AddFriendCommand(int userId, int friendId)
         {

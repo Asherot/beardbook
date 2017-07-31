@@ -3,7 +3,7 @@ using System.Web;
 
 namespace BeardBook.Commands
 {
-    public class AddPostCommand
+    public class AddPostCommand : ICommand
     {
         public AddPostCommand(int userId, string text, IEnumerable<HttpPostedFileBase> uploadedFiles)
         {

@@ -213,6 +213,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Commands\AddFriendCommand.cs" />
     <Compile Include="Commands\AddFriendCommandHandler.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandHandler.cs" />
     <Compile Include="Commands\RemoveAvatarCommand.cs" />
     <Compile Include="Commands\RemoveAvatarCommandHandler.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace BeardBook.Commands
 {
-    public class SendMessageCommand
+    public class SendMessageCommand : ICommand
     {
         public SendMessageCommand(int userId, int conversationId, string text, string url)
         {

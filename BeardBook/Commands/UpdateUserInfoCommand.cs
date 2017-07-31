@@ -2,7 +2,7 @@
 
 namespace BeardBook.Commands
 {
-    public class UpdateUserInfoCommand
+    public class UpdateUserInfoCommand : ICommand
     {
         public UpdateUserInfoCommand(int userId, string firstName, string lastName, string nickname, HttpPostedFileBase uploadedAvatar)
         {
