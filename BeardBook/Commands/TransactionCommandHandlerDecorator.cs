@@ -2,7 +2,7 @@
 
 namespace BeardBook.Commands
 {
-    public class TransactionCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
+    public class TransactionCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> where TCommand : ICommand
     {
         private readonly ICommandHandler<TCommand> _decorated;
 
