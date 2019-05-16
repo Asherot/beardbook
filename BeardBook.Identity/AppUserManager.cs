@@ -28,7 +28,7 @@ namespace BeardBook.Identity
                 RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = false,
             };
 
             manager.UserLockoutEnabledByDefault = true;
